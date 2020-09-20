@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous"> 
+        <link rel="icon" type="image/png" href="/icon.png">
+        <link rel="stylesheet" href="style.css">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <!-- Include eel.js - note this file doesn't exist in the 'web' directory -->
+
+        <title>GPS satelites coordinate calculator</title>
+
+        <script type="text/javascript" src="/eel.js"></script>
+        <script type="text/javascript">
+
+        $(function() {
+
+            // считывает
+            async function display()
+            {
+            let inp_id = document.getElementById('inp_id').value + ' ';
+            let inp_eccentricityl = document.getElementById('inp_eccentricity').value + ' ';
+            let inp_Time_of_Applicability = document.getElementById('inp_Time_of_Applicability').value + ' ';
+            let inp_Orbital_Inclination = document.getElementById('inp_Orbital_Inclination').value + ' ';
+            let inp_Rate_of_Right_Ascen = document.getElementById('inp_Rate_of_Right_Ascen').value + ' ';
+            let inp_SQRT = document.getElementById('inp_SQRT(A)').value + ' ';
+            let inp_Right_Ascen_at_Week = document.getElementById('inp_Right_Ascen_at_Week').value + ' ';
+            let inp_Argument_of_Perigee = document.getElementById('inp_Argument_of_Perigee').value + ' ';
+            let inp_Mean_Anom = document.getElementById('inp_Mean_Anom').value;
+
+
+            let str = await eel.py_func(inp_id + inp_eccentricityl + inp_Time_of_Applicability + inp_Orbital_Inclination + inp_Rate_of_Right_Ascen + inp_SQRT + inp_Right_Ascen_at_Week + inp_Argument_of_Perigee + inp_Mean_Anom)();
+
+            let arr = str.split(' ')
+
+            document.getElementById('satelite_coordinates_x').innerHTML = arr[0];
+            document.getElementById('satelite_coordinates_y').innerHTML = arr[1];
+            document.getElementById('satelite_coordinates_z').innerHTML = arr[2];
+            document.getElementById('distance').innerHTML = arr[3];
+            document.getElementById('azimuth').innerHTML = arr[4];
+            document.getElementById('elevation').innerHTML = arr[5];
+            }
+
+            // выводит 
+            $("#btn").click(function(){
+                display();
+            });
+        });
+
+    
+        </script>
+    </head>
+    
+    <body>
+            <div class="input">
+            <h6>NKA number</h6>
+            <input type='text' id='inp_id' placeholder='inp_id' value='8'>
+            <h6>Eccentricity</h6>
+            <input type='text' id='inp_eccentricity' placeholder='inp_eccentricity'  value='0.4450321198E-002'>
+            <h6>Time of Applicability(sec)</h6>
+            <input type='text' id='inp_Time_of_Applicability' placeholder='inp_Time_of_Applicability'  value='405504.0'>    
+            <h6>Orbital Inclination(rad)</h6>
+            <input type='text' id='inp_Orbital_Inclination' placeholder='inp_Orbital_Inclination'  value='0.9705328666'>
+            <h6>Rate of Right Ascen(r/s)</h6>
+            <input type='text' id='inp_Rate_of_Right_Ascen' placeholder='inp_Rate_of_Right_Ascen'  value='-0.7886042771E-008'>
+            <h6>SQRT(A)</h6>
+            <input type='text' id='inp_SQRT(A)' placeholder='inp_SQRT(A)'  value='5153.510742'>
+            <h6>Right Ascen at Week(rad)</h6>
+            <input type='text' id='inp_Right_Ascen_at_Week' placeholder='inp_Right_Ascen_at_Week'  value='0.2309270258E+000'>
+            <h6>Argument of Perigee(rad)</h6>
+            <input type='text' id='inp_Argument_of_Perigee' placeholder='inp_Argument_of_Perigee'  value='-0.232577104'>
+            <h6>Mean Anom(rad)</h6>
+            <input type='text' id='inp_Mean_Anom' placeholder='inp_Mean_Anom'  value='-0.4053031157E+000'>
+            <h6></h6>
+            <input type='button' id='btn' class='btn-primary' value='Calculate'>
+            
+
+        </div>
+
+
+                <div class="container">
+              <div class="screw"></div>
+              <div class="screw screw-1"></div>
+              <div class="screw screw-2"></div>
+              <div class="screw screw-3"></div>
+              <div class="logo">
+                <div class="logo-first">RADAR</div>
+                <div class="logo-second">SYSTEM</div>
+              </div>
+              <div class="circle circle-huge">
+                <div class="circle circle-big">
+                  <div class="circle circle-medium">
+                    <div class="circle circle-small">
+                      <div class="circle circle-tiny">
+                        <div class="circle circle-center"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="status">SCANNING</div>
+            </div>
+
+         <div class="output">
+
+            <h6>Satelite_coordinates_x</h6>
+            <textarea id= 'satelite_coordinates_x'></textarea>
+            <h6>Satelite_coordinates_y</h6>
+            <textarea id= 'satelite_coordinates_y'></textarea>
+            <h6>Satelite_coordinates_z</h6>
+            <textarea id= 'satelite_coordinates_z'></textarea>
+            <h6>Distance (m)</h6>
+            <textarea id= 'distance'></textarea>
+            <h6>Azimuth (grad)</h6>
+            <textarea id= 'azimuth'></textarea>
+            <h6>Elevation (grad)</h6>
+            <textarea id= 'elevation'></textarea>
+        </div>
+    </body>
+</html>
