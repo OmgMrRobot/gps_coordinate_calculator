@@ -1,15 +1,28 @@
 import math
 import numpy as np
 import eel
+from datetime import datetime, date, time
 
 eel.init('web')
+
+
+def time_(str):
+    str = [int(i) for i in str]
+    y, m, d, h, min = str
+    date_ = datetime(y, m, d, h, min)
+    week_day = date_.isoweekday()
+    if week_day == 1:
+        return (date_ - datetime(y, m, d)).total_seconds()
+    else:
+        return (date_ - datetime(y, m, d - week_day)).total_seconds()
 
 
 @eel.expose
 def py_func(str):
     str = str.split(' ')
-    str = [float(i) for i in str]
-    id, e, t_oa, i_k, omega_point, sqrt_A, omega_0, w, M_0 = str
+    t0 = time_(str[14:])  # Current time math.since beginning of the week (sec)
+    str = [float(i) for i in str[:14]]
+    id, e, t_oa, i_k, omega_point, sqrt_A, omega_0, w, M_0, dt, toe, x, y, z = str
     # id = 8
     # e = 0.4450321198E-002  # Eccentricity
     # t_oa = 405504.0  # Time of Applicability(sec)
@@ -25,11 +38,12 @@ def py_func(str):
     omega_e_point = 7.2921151467 * (10 ** (-5))  # WGS 84 value of the earth's rotation rate
 
     # Elements of Coordinate Systems (IS-GPS-200F.pdf sheet 105)
-    t0 = 3 * 24 * 3600 + id * 3600  # Current time (8:00 am, 18.09.2019) math.since beginning of the week (sec) = 3 days * 24 hours * 3600 sec + 8 * 3600 sec
-    dt = 18  # Deviation current time from GPS time
+
+    # t0 =  #3 * 24 * 3600 + id * 3600  # Current time (8:00 am, 18.09.2019) math.since beginning of the week (sec) = 3 days * 24 hours * 3600 sec + 8 * 3600 sec
+    # dt = 18  # Deviation current time from GPS time
     t = t0 + dt  # Current time GPS (sec)
     t_k = t - t_oa  # Time from ephemeris reference epoch (sec)
-    toe = 604800  # The epoch time
+    # toe = 604800  # The epoch time
 
     # Condition:
     # tk shall be the actual total time difference between the time t and the...
@@ -86,9 +100,9 @@ def py_func(str):
     z_k = y_k_hatch * math.sin(i_k)  # (m)
 
     # Bauman University roof coordinates:
-    x = 2846228.896  # (m)
-    y = 2198658.103  # (m)
-    z = 5249983.343  # (m)
+    # x = 2846228.896  # (m)
+    # y = 2198658.103  # (m)
+    # z = 5249983.343  # (m)
 
     # Counting athimuth and elevation
     # The coordinates of the navigation spacecraft range vector with respect to the roof:
@@ -150,3 +164,9 @@ def py_func(str):
 
 
 eel.start('main2.html', size=(1000, 700))
+
+# if 5 * 24 * 3600 + 8 * 3600 == time_('2019 9 20 8 00'):
+#     print(5 * 24 * 3600 + 8 * 3600)
+#     print('work')
+# print(1 * 24 * 3600 + 8 * 3600)
+# print(time_('2019 9 16 8 00'))

@@ -2,7 +2,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous"> 
-        <link rel="icon" type="image/png" href="/icon.png">
+        <link rel="icon" type="image/png" href="/icon12.png">
         <link rel="stylesheet" href="style.css">
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <!-- Include eel.js - note this file doesn't exist in the 'web' directory -->
@@ -25,10 +25,17 @@
             let inp_SQRT = document.getElementById('inp_SQRT(A)').value + ' ';
             let inp_Right_Ascen_at_Week = document.getElementById('inp_Right_Ascen_at_Week').value + ' ';
             let inp_Argument_of_Perigee = document.getElementById('inp_Argument_of_Perigee').value + ' ';
-            let inp_Mean_Anom = document.getElementById('inp_Mean_Anom').value;
+            let inp_Mean_Anom = document.getElementById('inp_Mean_Anom').value + ' ';
+            let inp_Current_time = document.getElementById('inp_Current_time').value;
+            let inp_deviation_current_time = document.getElementById('inp_deviation_current_time').value + ' ';
+            let inp_epoch_time = document.getElementById('inp_epoch_time').value + ' ';
+            let inp_x = document.getElementById('inp_coordinates_x').value + ' ';
+            let inp_y = document.getElementById('inp_coordinates_y').value + ' ';
+            let inp_z = document.getElementById('inp_coordinates_z').value + ' ';
 
 
-            let str = await eel.py_func(inp_id + inp_eccentricityl + inp_Time_of_Applicability + inp_Orbital_Inclination + inp_Rate_of_Right_Ascen + inp_SQRT + inp_Right_Ascen_at_Week + inp_Argument_of_Perigee + inp_Mean_Anom)();
+
+            let str = await eel.py_func(inp_id + inp_eccentricityl + inp_Time_of_Applicability + inp_Orbital_Inclination + inp_Rate_of_Right_Ascen + inp_SQRT + inp_Right_Ascen_at_Week + inp_Argument_of_Perigee + inp_Mean_Anom + inp_deviation_current_time + inp_epoch_time + inp_x +inp_y + inp_z + inp_Current_time)();
 
             let arr = str.split(' ')
 
@@ -51,32 +58,62 @@
     </head>
     
     <body>
-            <div class="input">
-            <h6>NKA number</h6>
-            <input type='text' id='inp_id' placeholder='inp_id' value='8'>
-            <h6>Eccentricity</h6>
-            <input type='text' id='inp_eccentricity' placeholder='inp_eccentricity'  value='0.4450321198E-002'>
-            <h6>Time of Applicability(sec)</h6>
-            <input type='text' id='inp_Time_of_Applicability' placeholder='inp_Time_of_Applicability'  value='405504.0'>    
-            <h6>Orbital Inclination(rad)</h6>
-            <input type='text' id='inp_Orbital_Inclination' placeholder='inp_Orbital_Inclination'  value='0.9705328666'>
-            <h6>Rate of Right Ascen(r/s)</h6>
-            <input type='text' id='inp_Rate_of_Right_Ascen' placeholder='inp_Rate_of_Right_Ascen'  value='-0.7886042771E-008'>
-            <h6>SQRT(A)</h6>
-            <input type='text' id='inp_SQRT(A)' placeholder='inp_SQRT(A)'  value='5153.510742'>
-            <h6>Right Ascen at Week(rad)</h6>
-            <input type='text' id='inp_Right_Ascen_at_Week' placeholder='inp_Right_Ascen_at_Week'  value='0.2309270258E+000'>
-            <h6>Argument of Perigee(rad)</h6>
-            <input type='text' id='inp_Argument_of_Perigee' placeholder='inp_Argument_of_Perigee'  value='-0.232577104'>
-            <h6>Mean Anom(rad)</h6>
-            <input type='text' id='inp_Mean_Anom' placeholder='inp_Mean_Anom'  value='-0.4053031157E+000'>
-            <h6></h6>
-            <input type='button' id='btn' class='btn-primary' value='Calculate'>
-            
-
+        <div class="input">
+	    <div class="input-block">
+		<h6>NKA number</h6>
+            	<input type='text' id='inp_id' placeholder='inp_id' value='8'>
+	    </div>
+	    <div class="input-block">
+		<h6>Eccentricity</h6>
+            	<input type='text' id='inp_eccentricity' placeholder='inp_eccentricity'  value='0.4450321198E-002'>
+	    </div>
+	    <div class="input-block">
+		<h6>Time of Applicability(sec)</h6>
+            	<input type='text' id='inp_Time_of_Applicability' placeholder='inp_Time_of_Applicability'  value='405504.0'>   
+	    </div>
+	    <div class="input-block">
+		<h6>Orbital Inclination(rad)</h6>
+          	  <input type='text' id='inp_Orbital_Inclination' placeholder='inp_Orbital_Inclination'  value='0.9705328666'>
+	    </div>
+	    <div class="input-block">
+ 		<h6>Rate of Right Ascen(r/s)</h6>
+            	<input type='text' id='inp_Rate_of_Right_Ascen' placeholder='inp_Rate_of_Right_Ascen'  value='-0.7886042771E-008'>
+	    </div>
+	    <div class="input-block">
+		<h6>SQRT(A)</h6>
+        	<input type='text' id='inp_SQRT(A)' placeholder='inp_SQRT(A)'  value='5153.510742'>
+	    </div>
+	    <div class="input-block">
+		<h6>Right Ascen at Week(rad)</h6>
+          	<input type='text' id='inp_Right_Ascen_at_Week' placeholder='inp_Right_Ascen_at_Week'  value='0.2309270258E+000'>
+	    </div>
+	    <div class="input-block">
+ 		<h6>Argument of Perigee(rad)</h6>
+            	<input type='text' id='inp_Argument_of_Perigee' placeholder='inp_Argument_of_Perigee'  value='-0.232577104'>
+	    </div>
+	    <div class="input-block">
+  		<h6>Mean Anom(rad)</h6>
+            	<input type='text' id='inp_Mean_Anom' placeholder='inp_Mean_Anom'  value='-0.4053031157E+000'>
+	    </div>
+	    <div class="input-block">
+		<h6>Date (yyyy mm dd hh mm)</h6>
+            	<input type='text' id='inp_Current_time' placeholder='inp_Current_time'  value='2019 9 18 8 00'>
+	    </div>
+	    <div class="input-block">
+ 		<h6>Deviation current time from GPS time</h6>
+            	<input type='text' id='inp_deviation_current_time' placeholder='inp_deviation_current_time'  value='18'>
+	    </div>
+	    <div class="input-block">
+  		<h6>The epoch time</h6>
+            	<input type='text' id='inp_epoch_time' placeholder='inp_epoch_time'  value='604800'>
+	    </div> 
         </div>
 
 
+		<div class="radar-block">
+		<div>
+		<!-- Заглушка -->
+		</div>
                 <div class="container">
               <div class="screw"></div>
               <div class="screw screw-1"></div>
@@ -100,20 +137,52 @@
               <div class="status">SCANNING</div>
             </div>
 
+        <div class="button">
+            <input type='button' id='btn' class='btn-primary' value='Calculate'>
+            
+        </div>
+</div>
+
          <div class="output">
 
-            <h6>Satelite_coordinates_x</h6>
+<div class="input-block">
+    <h6>Point_coordinates_x (m)</h6>
+        <input type='text' id='inp_coordinates_x' placeholder='inp_coordinates_x'  value='2846228.896'>
+</div>
+<div class="input-block">
+    <h6>Point_coordinates_y (m)</h6>
+        <input type='text' id='inp_coordinates_y' placeholder='inp_coordinates_y'  value='2198658.103'>
+</div> 
+<div class="input-block">
+    <h6>Point_coordinates_z (m)</h6>
+        <input type='text' id='inp_coordinates_z' placeholder='inp_coordinates_z'  value='5249983.343'>
+</div> 
+
+
+<div class="input-block">
+            <h6>Satelite_coordinates_x (m)</h6>
             <textarea id= 'satelite_coordinates_x'></textarea>
-            <h6>Satelite_coordinates_y</h6>
+</div>
+<div class="input-block">
+            <h6>Satelite_coordinates_y (m)</h6>
             <textarea id= 'satelite_coordinates_y'></textarea>
-            <h6>Satelite_coordinates_z</h6>
+</div>
+<div class="input-block">
+            <h6>Satelite_coordinates_z (m)</h6>
             <textarea id= 'satelite_coordinates_z'></textarea>
+</div>
+<div class="input-block">
             <h6>Distance (m)</h6>
             <textarea id= 'distance'></textarea>
+</div>
+<div class="input-block">
             <h6>Azimuth (grad)</h6>
             <textarea id= 'azimuth'></textarea>
+</div>
+<div class="input-block">
             <h6>Elevation (grad)</h6>
             <textarea id= 'elevation'></textarea>
+</div>
         </div>
     </body>
 </html>

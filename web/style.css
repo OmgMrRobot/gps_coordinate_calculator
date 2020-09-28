@@ -8,9 +8,10 @@ html {
 body {
   background: #232;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  
 }
 
 .container {
@@ -18,6 +19,7 @@ body {
   height: var(--size);
   position: relative;
   user-select: none;
+margin-right: 200px;
 }
 
 .status {
@@ -250,13 +252,22 @@ input, textarea{
 
 
 .input{
-	margin-left: 70px;
+	display: flex;
+	flex-wrap: wrap;
+        justify-content: space-around;
+	margin-top: 40px;
+	margin-bottom: 40px;
 }
 
-.output{
-	margin-right: 70px;
-	margin-bottom: 20px
+.butt: {
 
+	vertical-align: bottom;
+}
+.output{
+	
+	display: flex;
+	flex-wrap: wrap;
+    justify-content: center;
 }
 
 .btn-primary{
@@ -307,3 +318,29 @@ h6{
 }
 
 /* Magic Stuff End -> */
+
+.input-block {
+  width: 300px;
+  margin-right: 40px;
+  text-align: center;
+}
+
+.radar-block {
+display: flex;
+    justify-content: space-between;
+    align-items: center;
+margin-bottom: 40px;
+}
+
+@media (max-width: 1020px) {
+	.radar-block {
+ flex-direction: column;
+}
+.container {
+margin-right: 0;
+margin-bottom: 50px;
+}
+.input-block {
+margin-right: 0;
+}
+}
