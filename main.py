@@ -20,18 +20,11 @@ def time_(str):
 @eel.expose
 def py_func(str):
     str = str.split(' ')
-    t0 = time_(str[14:])  # Current time math.since beginning of the week (sec)
-    str = [float(i) for i in str[:14]]
-    id, e, t_oa, i_k, omega_point, sqrt_A, omega_0, w, M_0, dt, toe, x, y, z = str
-    # id = 8
-    # e = 0.4450321198E-002  # Eccentricity
-    # t_oa = 405504.0  # Time of Applicability(sec)
-    # i_k = 0.9705328666  # Orbital Inclination(rad)
-    # omega_point = -0.7886042771E-008  # Rate of Right Ascen(r/s)
-    # sqrt_A = 5153.510742  # SQRT(A)  (m**(1/2)) - корень из значения большой полуоси
-    # omega_0 = 0.2309270258E+000  # Right Ascen at Week(rad)
-    # w = -0.232577104  # Argument of Perigee(rad)
-    # M_0 = -0.4053031157E+000  # Mean Anom(rad)
+    t0 = time_(str[13:])  # Current time math.since beginning of the week (sec)
+    str = [float(i) for i in str[:13]]
+    id, e, t_oa, i_k, omega_point, sqrt_A, omega_0, w, M_0, toe, x, y, z = str
+
+
 
     # Constants
     mju = 3.986005 * 10 ** 14  # WGS 84 value of the earth's gravitational constant for GPS user
@@ -39,8 +32,8 @@ def py_func(str):
 
     # Elements of Coordinate Systems (IS-GPS-200F.pdf sheet 105)
 
-    # t0 =  #3 * 24 * 3600 + id * 3600  # Current time (8:00 am, 18.09.2019) math.since beginning of the week (sec) = 3 days * 24 hours * 3600 sec + 8 * 3600 sec
-    # dt = 18  # Deviation current time from GPS time
+    # t0  Current time (8:00 am, 18.09.2019) math.since beginning of the week (sec) = 3 days * 24 hours * 3600 sec + 8 * 3600 sec
+    dt = 18  #Deviation current time from GPS time
     t = t0 + dt  # Current time GPS (sec)
     t_k = t - t_oa  # Time from ephemeris reference epoch (sec)
     # toe = 604800  # The epoch time
@@ -100,10 +93,7 @@ def py_func(str):
     z_k = y_k_hatch * math.sin(i_k)  # (m)
 
     # Bauman University roof coordinates:
-    # x = 2846228.896  # (m)
-    # y = 2198658.103  # (m)
-    # z = 5249983.343  # (m)
-
+   
     # Counting athimuth and elevation
     # The coordinates of the navigation spacecraft range vector with respect to the roof:
     delta_r_x = x_k - x  # (m)
@@ -155,18 +145,10 @@ def py_func(str):
     elif alpha_grad > 360:
         alpha_grad = alpha_grad - 360
 
-    # print(f'Satelite coordinates: {x_k,y_k,z_k} \n')
-    # print(f'Distance: {math.sqrt(x_k**2+y_k**2+z_k**2)} m\n')
-    # print(f'Azimuth: { alpha_grad} grad\n')
-    # print(f'Elevation: {beta_grad} grad\n')
-    # print('---------------\n')
+
     return f'{x_k} {y_k} {z_k} {math.sqrt(x_k ** 2 + y_k ** 2 + z_k ** 2)} {alpha_grad} {beta_grad}'
 
 
-eel.start('main2.html', size=(1000, 700))
+eel.start('main2.html', size=(700, 700))
 
-# if 5 * 24 * 3600 + 8 * 3600 == time_('2019 9 20 8 00'):
-#     print(5 * 24 * 3600 + 8 * 3600)
-#     print('work')
-# print(1 * 24 * 3600 + 8 * 3600)
-# print(time_('2019 9 16 8 00'))
+

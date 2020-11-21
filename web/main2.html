@@ -27,7 +27,6 @@
             let inp_Argument_of_Perigee = document.getElementById('inp_Argument_of_Perigee').value + ' ';
             let inp_Mean_Anom = document.getElementById('inp_Mean_Anom').value + ' ';
             let inp_Current_time = document.getElementById('inp_Current_time').value;
-            let inp_deviation_current_time = document.getElementById('inp_deviation_current_time').value + ' ';
             let inp_epoch_time = document.getElementById('inp_epoch_time').value + ' ';
             let inp_x = document.getElementById('inp_coordinates_x').value + ' ';
             let inp_y = document.getElementById('inp_coordinates_y').value + ' ';
@@ -35,7 +34,7 @@
 
 
 
-            let str = await eel.py_func(inp_id + inp_eccentricityl + inp_Time_of_Applicability + inp_Orbital_Inclination + inp_Rate_of_Right_Ascen + inp_SQRT + inp_Right_Ascen_at_Week + inp_Argument_of_Perigee + inp_Mean_Anom + inp_deviation_current_time + inp_epoch_time + inp_x +inp_y + inp_z + inp_Current_time)();
+            let str = await eel.py_func(inp_id + inp_eccentricityl + inp_Time_of_Applicability + inp_Orbital_Inclination + inp_Rate_of_Right_Ascen + inp_SQRT + inp_Right_Ascen_at_Week + inp_Argument_of_Perigee + inp_Mean_Anom  + inp_epoch_time + inp_x +inp_y + inp_z + inp_Current_time)();
 
             let arr = str.split(' ')
 
@@ -98,10 +97,6 @@
 	    <div class="input-block">
 		<h6>Date (yyyy mm dd hh mm)</h6>
             	<input type='text' id='inp_Current_time' placeholder='inp_Current_time'  value='2019 9 18 8 00'>
-	    </div>
-	    <div class="input-block">
- 		<h6>Deviation current time from GPS time</h6>
-            	<input type='text' id='inp_deviation_current_time' placeholder='inp_deviation_current_time'  value='18'>
 	    </div>
 	    <div class="input-block">
   		<h6>The epoch time</h6>
